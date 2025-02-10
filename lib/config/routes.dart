@@ -9,8 +9,8 @@ class AppRouter {
 
   static Route onGenerateRoute(RouteSettings settings) {
     switch (settings.name) {
-      // case AppRouteStrings.base:
-      //   return CupertinoPageRoute(builder: (_) => SplashScreen());
+      case AppRouteStrings.base:
+        return CupertinoPageRoute(builder: (_) => SplashScreen());
       case AppRouteStrings.base:
         return CupertinoPageRoute(builder: (_) => HomeScreen());
 
