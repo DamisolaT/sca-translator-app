@@ -9,4 +9,5 @@ class AppIcons {
   static const String engLogo = '${basePath}eng$format';
   static const String arLogo = '${basePath}ar$format';
   static const String spanLogo = '${basePath}span$format';
+  static const String backIcon = '${basePath}back_icon$format';
 }
