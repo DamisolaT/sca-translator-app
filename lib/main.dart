@@ -22,7 +22,7 @@ class MyApp extends StatelessWidget {
       ),
       navigatorKey: AppRouter.navKey,
       onGenerateRoute: AppRouter.onGenerateRoute,
-      initialRoute: AppRouteStrings.base,
+      initialRoute: AppRouteStrings.voiceConversationScreen,
     );
   }
 }
