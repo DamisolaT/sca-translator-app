@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:sca_translator_app/core/utils/images.dart';
+import 'package:sca_translator_app/features/screens/favourite_page/favourite_page.dart';
+import 'package:sca_translator_app/features/screens/voice_conversation/voice_conversation_screen.dart';
 
 import '../../../core/theme/colors.dart';
 import '../history/history_page.dart';
@@ -15,7 +17,12 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   int currentindex = 0;
-  final screens = [HomeScreen(), HistoryPage()];
+  final screens = [
+    VoiceConversationScreen(),
+    HomeScreen(),
+    HistoryPage(),
+    FavouritePage()
+  ];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
