@@ -22,4 +22,5 @@ class AppIcons {
   static const String shareIcon = '${basePath}share$format';
   static const String starIcon = '${basePath}star$format';
   static const String ratingIcon = '${basePath}rating$format';
+  static const String starrIcon = '${basePath}starr$format';
 }
