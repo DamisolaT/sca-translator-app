@@ -3,6 +3,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:sca_translator_app/core/utils/images.dart';
 
 import '../../../core/theme/colors.dart';
+import '../history/history_page.dart';
 import 'home_screen.dart';
 
 class HomePage extends StatefulWidget {
@@ -14,9 +15,7 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   int currentindex = 0;
-  final screens = [
-    HomeScreen(),
-  ];
+  final screens = [HomeScreen(), HistoryPage()];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
