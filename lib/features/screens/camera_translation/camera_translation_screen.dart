@@ -35,13 +35,13 @@ class _CameraTranslationScreenState extends State<CameraTranslationScreen> {
         ),
         body: SafeArea(
             child: Padding(
-          padding: const EdgeInsets.all(22.0),
+          padding: const EdgeInsets.symmetric(vertical: 22.0),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               EnglishSpanishContainer(englishImage: AppIcons.engLogo, spanishImage: AppIcons.spanLogo,),
               Padding(
-                padding: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
+                padding: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 60.0),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   crossAxisAlignment: CrossAxisAlignment.center,
