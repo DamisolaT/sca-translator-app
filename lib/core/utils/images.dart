@@ -26,4 +26,5 @@ class AppIcons {
   static const String ratingIcon = '${basePath}rating$format';
   static const String starrIcon = '${basePath}starr$format';
   static const String backIcon = '${basePath}back_icon$format';
+  static const String flashOffIcon = '${basePath}flash_off$format';
 }

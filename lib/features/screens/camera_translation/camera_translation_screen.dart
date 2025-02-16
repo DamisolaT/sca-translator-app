@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:sca_translator_app/core/theme/colors.dart';
 import 'package:sca_translator_app/core/utils/images.dart';
+import 'package:sca_translator_app/features/screens/home/home_screen.dart';
 
 class CameraTranslationScreen extends StatefulWidget {
   const CameraTranslationScreen({super.key});
@@ -38,8 +39,9 @@ class _CameraTranslationScreenState extends State<CameraTranslationScreen> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
+              EnglishSpanishContainer(englishImage: AppIcons.engLogo, spanishImage: AppIcons.spanLogo,),
               Padding(
-                padding: const EdgeInsets.all(10.0),
+                padding: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   crossAxisAlignment: CrossAxisAlignment.center,
