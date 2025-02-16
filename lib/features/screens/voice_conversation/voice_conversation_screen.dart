@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:sca_translator_app/core/theme/colors.dart';
 import 'package:sca_translator_app/core/utils/images.dart';
+import 'package:sca_translator_app/features/screens/home/home_screen.dart';
 
 class VoiceConversationScreen extends StatefulWidget {
   const VoiceConversationScreen({super.key});
@@ -14,6 +15,25 @@ class VoiceConversationScreen extends StatefulWidget {
 class _VoiceConversationScreenState extends State<VoiceConversationScreen> {
   @override
   Widget build(BuildContext context) {
+    List<Map<String, dynamic>> messages = [
+      {
+        "text": "Hello how are you?",
+        "translation": "¿Hola como estas?",
+        "isSender": false
+      },
+      {"text": "Hola", "translation": "Hello", "isSender": true},
+      {
+        "text": "Hello how?",
+        "translation": "¿Hola como estas?",
+        "isSender": false
+      },
+      {
+        "text": "Hola hjjhuuiiuiujbvbcvfddsdtfyghhjjkopiuhjb ggvbhjbuuy",
+        "translation": "Hello",
+        "isSender": true
+      },
+    ];
+
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
@@ -34,20 +54,33 @@ class _VoiceConversationScreenState extends State<VoiceConversationScreen> {
       ),
       body: SafeArea(
         child: Padding(
-          padding: const EdgeInsets.all(22.0),
+          padding: const EdgeInsets.all(20.0),
           child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              VoiceCard(
-                message: "Hello how are you?",
-                translation: "¿Hola como estas?",
-                isSender: false,
+              Expanded(
+                child: ListView.separated(
+                  padding: const EdgeInsets.symmetric(horizontal: 15),
+                  itemCount: messages.length,
+                  separatorBuilder: (context, index) =>
+                      SizedBox(height: 10),
+                  itemBuilder: (context, index) {
+                    final message = messages[index];
+                    return VoiceCard(
+                      message: message["text"],
+                      translation: message["translation"],
+                      isSender: message["isSender"],
+                    );
+                  },
+                ),
               ),
-              VoiceCard(
-                message: "Hola",
-                translation: "Hello",
-                isSender: true,
-              ),
+              SizedBox(height: 15,),
+              EnglishSpanishContainer(
+                englishImage: AppIcons.englishMicIcon,
+                spanishImage: AppIcons.spanishMicIcon,
+                imagePadding: EdgeInsets.all(4.0),
+              )
             ],
           ),
         ),
@@ -70,53 +103,120 @@ class VoiceCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment:
-          isSender ? MainAxisAlignment.end : MainAxisAlignment.start,
-      children: [
-        Container(
-          child: IntrinsicWidth(
-            child: Card(
-              elevation: 3,
-              color: AppColors.cardColor,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(11),
-              ),
-              child: Padding(
-                padding: const EdgeInsets.all(18),
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.only(left: 16.0, right: 55.0),
-                      child: Text(
-                        message,
-                        style: TextStyle(
-                          color: AppColors.appbar,
-                          fontSize: 14,
-                        ),
-                        textAlign: TextAlign.left,
+    double maxWidth = MediaQuery.of(context).size.width * 0.6;
+
+    return Align(
+      alignment: isSender ? Alignment.centerRight : Alignment.centerLeft,
+      child: ConstrainedBox(
+        constraints: BoxConstraints(maxWidth: maxWidth),
+        child: IntrinsicWidth(
+          child: Card(
+            elevation: 1.5,
+            color: AppColors.cardColor,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(11),
+            ),
+            child: Padding(
+              padding: const EdgeInsets.all(18),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.only(right: 55.0),
+                    child: Text(
+                      message,
+                      style: TextStyle(
+                        color: AppColors.appbar,
+                        fontSize: 14,
                       ),
+                      textAlign: TextAlign.left,
+                      softWrap: true,
                     ),
-                    Divider(
-                      color: AppColors.grey,
+                  ),
+                  Divider(color: AppColors.grey),
+                  Padding(
+                    padding: const EdgeInsets.only(right: 55.0),
+                    child: Text(
+                      translation,
+                      style: TextStyle(color: AppColors.orange, fontSize: 14),
+                      textAlign: TextAlign.left,
+                      softWrap: true,
                     ),
-                    Padding(
-                      padding: const EdgeInsets.only(left: 16.0, right: 55.0),
-                      child: Text(
-                        translation,
-                        style: TextStyle(color: AppColors.orange, fontSize: 14),
-                        textAlign: TextAlign.left,
-                      ),
-                    ),
-                  ],
-                ),
+                  ),
+                ],
               ),
             ),
           ),
         ),
-      ],
+      ),
     );
   }
 }
+
+// class VoiceCard extends StatelessWidget {
+//   const VoiceCard({
+//     super.key,
+//     required this.message,
+//     required this.translation,
+//     required this.isSender,
+//   });
+//
+//   final String message;
+//   final String translation;
+//   final bool isSender;
+//
+//   @override
+//   Widget build(BuildContext context) {
+//     double maxWidth = MediaQuery.of(context).size.width * 0.6;
+//
+//     return Row(
+//       mainAxisAlignment:
+//           isSender ? MainAxisAlignment.end : MainAxisAlignment.start,
+//       children: [
+//         Container(
+//           child: IntrinsicWidth(
+//             child: Card(
+//               elevation: 3,
+//               color: AppColors.cardColor,
+//               shape: RoundedRectangleBorder(
+//                 borderRadius: BorderRadius.circular(11),
+//               ),
+//               child: Padding(
+//                 padding: const EdgeInsets.all(18),
+//                 child: Column(
+//                   mainAxisSize: MainAxisSize.min,
+//                   crossAxisAlignment: CrossAxisAlignment.start,
+//                   children: [
+//                     Padding(
+//                       padding: const EdgeInsets.only(left: 16.0, right: 55.0),
+//                       child: Text(
+//                         message,
+//                         style: TextStyle(
+//                           color: AppColors.appbar,
+//                           fontSize: 14,
+//                         ),
+//                         textAlign: TextAlign.left,
+//                       ),
+//                     ),
+//                     Divider(
+//                       color: AppColors.grey,
+//                     ),
+//                     Padding(
+//                       padding: const EdgeInsets.only(left: 16.0, right: 55.0),
+//                       child: Text(
+//                         translation,
+//                         style: TextStyle(color: AppColors.orange, fontSize: 14),
+//                         textAlign: TextAlign.left,
+//                       ),
+//                     ),
+//                   ],
+//                 ),
+//               ),
+//             ),
+//           ),
+//         ),
+//       ],
+//     );
+//   }
+// }

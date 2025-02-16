@@ -27,4 +27,6 @@ class AppIcons {
   static const String starrIcon = '${basePath}starr$format';
   static const String backIcon = '${basePath}back_icon$format';
   static const String flashOffIcon = '${basePath}flash_off$format';
+  static const String englishMicIcon = '${basePath}englishMic$format';
+  static const String spanishMicIcon = '${basePath}spanishMic$format';
 }

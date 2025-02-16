@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:sca_translator_app/core/utils/images.dart';
+import 'package:sca_translator_app/features/screens/camera_translation/camera_translation_screen.dart';
 import 'package:sca_translator_app/features/screens/favourite_page/favourite_page.dart';
 import 'package:sca_translator_app/features/screens/voice_conversation/voice_conversation_screen.dart';
 
@@ -19,6 +20,7 @@ class _HomePageState extends State<HomePage> {
   int currentindex = 0;
   final screens = [
     VoiceConversationScreen(),
+    CameraTranslationScreen(),
     HomeScreen(),
     HistoryPage(),
     FavouritePage()
