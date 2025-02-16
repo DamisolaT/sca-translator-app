@@ -18,7 +18,7 @@ class FavouritePage extends StatelessWidget {
           },
         ),
         title: Text(
-          "History",
+          "Favourite",
           style: TextStyle(color: AppColors.white),
         ),
         actions: [

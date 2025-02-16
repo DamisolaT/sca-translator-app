@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:sca_translator_app/core/theme/colors.dart';
 import 'package:sca_translator_app/core/utils/images.dart';
+import 'package:sca_translator_app/features/screens/home/nav_bar.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -10,14 +11,10 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
+      drawer: NavBar(),
       appBar: AppBar(
+        iconTheme: IconThemeData(color: AppColors.white),
         backgroundColor: AppColors.appbar,
-        leading: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 20),
-          child: SvgPicture.asset(
-            AppIcons.menuLogo,
-          ),
-        ),
         title: Text(
           "language Translator,",
           style: TextStyle(
@@ -61,6 +58,7 @@ class HomeScreen extends StatelessWidget {
     );
   }
 }
+
 class EnglishSpanishContainer extends StatelessWidget {
   const EnglishSpanishContainer({
     super.key,

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:sca_translator_app/core/theme/colors.dart';
 import 'package:sca_translator_app/core/utils/images.dart';
 import 'package:sca_translator_app/features/screens/home/home_page.dart';
 
@@ -26,19 +27,28 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(
-        width: double.infinity,
-        height: double.infinity,
-        decoration: BoxDecoration(
-          image: DecorationImage(
-            image: AssetImage(AppImages.splashBgImage),
-            fit: BoxFit.cover,
-            alignment: Alignment.center,
-          ),
-        ),
+      backgroundColor: AppColors.white,
+      body: Center(
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
+            Stack(
+              children: [
+                Align(
+                  alignment: Alignment.topLeft,
+                  child: SvgPicture.asset(
+                    AppIcons.blueShape,
+                  ),
+                ),
+                Align(
+                  alignment: Alignment.topRight,
+                  child: SvgPicture.asset(
+                    AppIcons.orangeShape,
+                  ),
+                ),
+              ],
+            ),
             const Spacer(flex: 2),
             Column(
               mainAxisAlignment: MainAxisAlignment.center,
