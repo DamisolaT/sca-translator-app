@@ -23,15 +23,17 @@ class _VoiceConversationScreenState extends State<VoiceConversationScreen> {
       },
       {"text": "Hola", "translation": "Hello", "isSender": true},
       {
-        "text": "Hello how?",
+        "text": "Hello how are you?",
         "translation": "¿Hola como estas?",
         "isSender": false
       },
+      {"text": "Hola", "translation": "Hello", "isSender": true},
       {
-        "text": "Hola hjjhuuiiuiujbvbcvfddsdtfyghhjjkopiuhjb ggvbhjbuuy",
-        "translation": "Hello",
-        "isSender": true
+        "text": "Hello how are you?",
+        "translation": "¿Hola como estas?",
+        "isSender": false
       },
+      {"text": "Hola", "translation": "Hello", "isSender": true},
     ];
 
     return Scaffold(
@@ -54,17 +56,16 @@ class _VoiceConversationScreenState extends State<VoiceConversationScreen> {
       ),
       body: SafeArea(
         child: Padding(
-          padding: const EdgeInsets.all(20.0),
+          padding: const EdgeInsets.only(top: 10.0, bottom: 15.0),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Expanded(
                 child: ListView.separated(
-                  padding: const EdgeInsets.symmetric(horizontal: 15),
+                  padding: const EdgeInsets.symmetric(horizontal: 22, vertical: 15),
                   itemCount: messages.length,
-                  separatorBuilder: (context, index) =>
-                      SizedBox(height: 10),
+                  separatorBuilder: (context, index) => SizedBox(height: 10),
                   itemBuilder: (context, index) {
                     final message = messages[index];
                     return VoiceCard(
@@ -75,7 +76,6 @@ class _VoiceConversationScreenState extends State<VoiceConversationScreen> {
                   },
                 ),
               ),
-              SizedBox(height: 15,),
               EnglishSpanishContainer(
                 englishImage: AppIcons.englishMicIcon,
                 spanishImage: AppIcons.spanishMicIcon,
@@ -123,7 +123,7 @@ class VoiceCard extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Padding(
-                    padding: const EdgeInsets.only(right: 55.0),
+                    padding: const EdgeInsets.only(right: 45.0),
                     child: Text(
                       message,
                       style: TextStyle(
@@ -136,7 +136,7 @@ class VoiceCard extends StatelessWidget {
                   ),
                   Divider(color: AppColors.grey),
                   Padding(
-                    padding: const EdgeInsets.only(right: 55.0),
+                    padding: const EdgeInsets.only(right: 45.0),
                     child: Text(
                       translation,
                       style: TextStyle(color: AppColors.orange, fontSize: 14),
