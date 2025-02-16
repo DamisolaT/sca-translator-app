@@ -1,5 +1,7 @@
 class AppImages {
   static const String basePath = 'assets/images/';
+  static const String format = '.png';
+  static const String previewImg = '${basePath}preview_img$format';
   static const String ratingImage = '${basePath}img.png';
 }
 
@@ -10,7 +12,6 @@ class AppIcons {
   static const String engLogo = '${basePath}eng$format';
   static const String arLogo = '${basePath}ar$format';
   static const String spanLogo = '${basePath}span$format';
-
   static const String exitIcon = '${basePath}exit$format';
   static const String monogramIcon = '${basePath}monogram$format';
   static const String axIcon = '${basePath}ax$format';
@@ -23,8 +24,6 @@ class AppIcons {
   static const String shareIcon = '${basePath}share$format';
   static const String starIcon = '${basePath}star$format';
   static const String ratingIcon = '${basePath}rating$format';
-
   static const String starrIcon = '${basePath}starr$format';
-
   static const String backIcon = '${basePath}back_icon$format';
 }
