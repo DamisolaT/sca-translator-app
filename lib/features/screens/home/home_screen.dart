@@ -67,9 +67,11 @@ class EnglishSpanishContainer extends StatelessWidget {
     super.key,
     required this.englishImage,
     required this.spanishImage,
+    this.imagePadding = const EdgeInsets.all(12.0),
   });
   final String englishImage;
   final String spanishImage;
+  final EdgeInsets imagePadding;
 
   @override
   Widget build(BuildContext context) {
@@ -87,7 +89,7 @@ class EnglishSpanishContainer extends StatelessWidget {
           children: [
             // English Section
             Padding(
-              padding: const EdgeInsets.all(12.0),
+              padding: imagePadding,
               child: Row(
                 children: [
                   SvgPicture.asset(englishImage),
@@ -116,7 +118,7 @@ class EnglishSpanishContainer extends StatelessWidget {
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsets.all(12),
+                  padding: imagePadding,
                   child: SvgPicture.asset(spanishImage),
                 ),
               ],
