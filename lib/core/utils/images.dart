@@ -33,4 +33,10 @@ class AppIcons {
   static const String englishMicIcon = '${basePath}englishMic$format';
   static const String spanishMicIcon = '${basePath}spanishMic$format';
   static const String splashLoading = '${basePath}splash_loading$format';
+  static const String feedBack = '${basePath}feedback$format';
+  static const String privacy = '${basePath}privacy$format';
+  static const String rate = '${basePath}rate$format';
+  static const String shareApp = '${basePath}shareapp$format';
+  static const String blueShape = '${basePath}blue$format';
+  static const String orangeShape = '${basePath}orange$format';
 }
