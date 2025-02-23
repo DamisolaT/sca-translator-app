@@ -39,4 +39,5 @@ class AppIcons {
   static const String shareApp = '${basePath}shareapp$format';
   static const String blueShape = '${basePath}blue$format';
   static const String orangeShape = '${basePath}orange$format';
+  static const String micIcon = '${basePath}mic_icon$format';
 }
