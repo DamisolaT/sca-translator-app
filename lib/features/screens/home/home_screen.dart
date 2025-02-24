@@ -65,10 +65,18 @@ class EnglishSpanishContainer extends StatelessWidget {
     required this.englishImage,
     required this.spanishImage,
     this.imagePadding = const EdgeInsets.all(12.0),
+    this.onEnglishMicTap,
+    this.onSpanishMicTap,
+    this.speakingEnglish = false,
+    this.speakingSpanish = false,
   });
   final String englishImage;
   final String spanishImage;
   final EdgeInsets imagePadding;
+  final VoidCallback? onEnglishMicTap;
+  final VoidCallback? onSpanishMicTap;
+  final bool speakingEnglish;
+  final bool speakingSpanish;
 
   @override
   Widget build(BuildContext context) {
@@ -89,7 +97,37 @@ class EnglishSpanishContainer extends StatelessWidget {
               padding: imagePadding,
               child: Row(
                 children: [
-                  SvgPicture.asset(englishImage),
+                  GestureDetector(
+                    onTap: onEnglishMicTap,
+                    child: Stack(
+                      alignment: Alignment.center,
+                      children: [
+                        TweenAnimationBuilder<double>(
+                          tween: Tween(
+                              begin: 0.0, end: speakingEnglish ? 1.0 : 0.0),
+                          duration: Duration(milliseconds: 300),
+                          curve: Curves.easeInOut,
+                          builder: (context, value, child) {
+                            return Container(
+                              padding: value > 0
+                                  ? EdgeInsets.all(value * 2)
+                                  : EdgeInsets.zero,
+                              decoration: BoxDecoration(
+                                shape: BoxShape.circle,
+                                border: Border.all(
+                                  color: AppColors.appbar
+                                      .withAlpha((value * 120).toInt()),
+                                  width: value > 0 ? 2 : 0,
+                                ),
+                              ),
+                              child: child,
+                            );
+                          },
+                          child: SvgPicture.asset(englishImage),
+                        ),
+                      ],
+                    ),
+                  ),
                   SizedBox(width: 8),
                   Text(
                     "English",
@@ -116,7 +154,37 @@ class EnglishSpanishContainer extends StatelessWidget {
                 ),
                 Padding(
                   padding: imagePadding,
-                  child: SvgPicture.asset(spanishImage),
+                  child: GestureDetector(
+                    onTap: onSpanishMicTap,
+                    child: Stack(
+                      alignment: Alignment.center,
+                      children: [
+                        TweenAnimationBuilder<double>(
+                          tween: Tween(
+                              begin: 0.0, end: speakingSpanish ? 1.0 : 0.0),
+                          duration: Duration(milliseconds: 300),
+                          curve: Curves.easeInOut,
+                          builder: (context, value, child) {
+                            return Container(
+                              padding: value > 0
+                                  ? EdgeInsets.all(value * 2)
+                                  : EdgeInsets.zero,
+                              decoration: BoxDecoration(
+                                shape: BoxShape.circle,
+                                border: Border.all(
+                                  color: AppColors.orange
+                                      .withAlpha((value * 120).toInt()),
+                                  width: value > 0 ? 2 : 0,
+                                ),
+                              ),
+                              child: child,
+                            );
+                          },
+                          child: SvgPicture.asset(spanishImage),
+                        ),
+                      ],
+                    ),
+                  ),
                 ),
               ],
             ),

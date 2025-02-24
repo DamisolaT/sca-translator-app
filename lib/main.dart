@@ -1,10 +1,19 @@
 import 'package:flutter/material.dart';
-
+import 'package:sca_translator_app/services/speech_to_text_service.dart';
 import 'config/route_strings.dart';
 import 'config/routes.dart';
+import 'package:provider/provider.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider(
+            create: (_) => SpeechToTextService()),
+      ],
+      child: const MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
