@@ -219,9 +219,18 @@ class SpeechTranslationContainer extends StatelessWidget {
         width: 320,
         height: 47,
         decoration: BoxDecoration(
-          color: AppColors.grey,
+          color: AppColors.cardColor,
           borderRadius: BorderRadius.circular(50),
+          boxShadow: [
+            BoxShadow(
+              color: Color.fromRGBO(0, 0, 0, 0.1),
+              offset: Offset(0, 4),
+              blurRadius: 4,
+              spreadRadius: 1,
+            ),
+          ],
         ),
+
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
