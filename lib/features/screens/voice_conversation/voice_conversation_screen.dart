@@ -4,7 +4,6 @@ import 'package:provider/provider.dart';
 import 'package:sca_translator_app/core/theme/colors.dart';
 import 'package:sca_translator_app/core/utils/images.dart';
 import 'package:sca_translator_app/features/screens/home/home_page.dart';
-import 'package:sca_translator_app/features/screens/home/home_screen.dart';
 import 'package:sca_translator_app/services/speech_to_text_service.dart';
 
 class VoiceConversationScreen extends StatefulWidget {
@@ -108,7 +107,7 @@ class _VoiceConversationScreenState extends State<VoiceConversationScreen> {
                   },
                 ),
               ),
-              EnglishSpanishContainer(
+              SpeechTranslationContainer(
                 englishImage: AppIcons.englishMicIcon,
                 spanishImage: AppIcons.spanishMicIcon,
                 imagePadding: EdgeInsets.all(4.0),
@@ -187,6 +186,142 @@ class VoiceCard extends StatelessWidget {
               ),
             ),
           ),
+        ),
+      ),
+    );
+  }
+}
+
+class SpeechTranslationContainer extends StatelessWidget {
+  const SpeechTranslationContainer({
+    super.key,
+    required this.englishImage,
+    required this.spanishImage,
+    this.imagePadding = const EdgeInsets.all(12.0),
+    this.onEnglishMicTap,
+    this.onSpanishMicTap,
+    this.speakingEnglish = false,
+    this.speakingSpanish = false,
+  });
+  final String englishImage;
+  final String spanishImage;
+  final EdgeInsets imagePadding;
+  final VoidCallback? onEnglishMicTap;
+  final VoidCallback? onSpanishMicTap;
+  final bool speakingEnglish;
+  final bool speakingSpanish;
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 20),
+      child: Container(
+        width: 320,
+        height: 47,
+        decoration: BoxDecoration(
+          color: AppColors.grey,
+          borderRadius: BorderRadius.circular(50),
+        ),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            // English Section
+            Padding(
+              padding: imagePadding,
+              child: Row(
+                children: [
+                  GestureDetector(
+                    onTap: onEnglishMicTap,
+                    child: Stack(
+                      alignment: Alignment.center,
+                      children: [
+                        TweenAnimationBuilder<double>(
+                          tween: Tween(
+                              begin: 0.0, end: speakingEnglish ? 1.0 : 0.0),
+                          duration: Duration(milliseconds: 300),
+                          curve: Curves.easeInOut,
+                          builder: (context, value, child) {
+                            return Container(
+                              padding: value > 0
+                                  ? EdgeInsets.all(value * 2)
+                                  : EdgeInsets.zero,
+                              decoration: BoxDecoration(
+                                shape: BoxShape.circle,
+                                border: Border.all(
+                                  color: AppColors.appbar
+                                      .withAlpha((value * 120).toInt()),
+                                  width: value > 0 ? 2 : 0,
+                                ),
+                              ),
+                              child: child,
+                            );
+                          },
+                          child: SvgPicture.asset(englishImage),
+                        ),
+                      ],
+                    ),
+                  ),
+                  SizedBox(width: 8),
+                  Text(
+                    "English",
+                    style: TextStyle(
+                      fontWeight: FontWeight.w500,
+                      fontSize: 16,
+                      color: AppColors.black,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+
+            Center(child: SvgPicture.asset(AppIcons.arLogo)),
+            Row(
+              children: [
+                Text(
+                  "Spanish",
+                  style: TextStyle(
+                    fontWeight: FontWeight.w500,
+                    fontSize: 16,
+                    color: AppColors.black,
+                  ),
+                ),
+                Padding(
+                  padding: imagePadding,
+                  child: GestureDetector(
+                    onTap: onSpanishMicTap,
+                    child: Stack(
+                      alignment: Alignment.center,
+                      children: [
+                        TweenAnimationBuilder<double>(
+                          tween: Tween(
+                              begin: 0.0, end: speakingSpanish ? 1.0 : 0.0),
+                          duration: Duration(milliseconds: 300),
+                          curve: Curves.easeInOut,
+                          builder: (context, value, child) {
+                            return Container(
+                              padding: value > 0
+                                  ? EdgeInsets.all(value * 2)
+                                  : EdgeInsets.zero,
+                              decoration: BoxDecoration(
+                                shape: BoxShape.circle,
+                                border: Border.all(
+                                  color: AppColors.orange
+                                      .withAlpha((value * 120).toInt()),
+                                  width: value > 0 ? 2 : 0,
+                                ),
+                              ),
+                              child: child,
+                            );
+                          },
+                          child: SvgPicture.asset(spanishImage),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ],
         ),
       ),
     );
