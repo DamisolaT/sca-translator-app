@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:image_picker/image_picker.dart';
@@ -18,7 +19,27 @@ class CameraTranslationScreen extends StatefulWidget {
 class _CameraTranslationScreenState extends State<CameraTranslationScreen> {
   File? _image;
   final ImagePicker imagePicker = ImagePicker();
+  CameraController? _cameraController;
+  List<CameraDescription>? _cameras;
+  // Track flash status
+  bool _isFlashOn = false;
 
+  @override
+  void initState() {
+    super.initState();
+    initializeCamera();
+  }
+
+  // Initialize the camera
+  Future<void> initializeCamera() async {
+    _cameras = await availableCameras();
+    _cameraController =
+        CameraController(_cameras!.first, ResolutionPreset.medium);
+    await _cameraController!.initialize();
+    setState(() {});
+  }
+
+  // Capture Image
   Future<void> getImage() async {
     final XFile? image =
         await imagePicker.pickImage(source: ImageSource.camera);
@@ -30,6 +51,23 @@ class _CameraTranslationScreenState extends State<CameraTranslationScreen> {
     }
   }
 
+  // Toggle Flash Mode
+  void toggleFlash() async {
+    if (_cameraController != null) {
+      _isFlashOn = !_isFlashOn;
+      await _cameraController!.setFlashMode(
+        _isFlashOn ? FlashMode.torch : FlashMode.off,
+      );
+      setState(() {});
+    }
+  }
+
+  @override
+  void dispose() {
+    _cameraController?.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -38,9 +76,7 @@ class _CameraTranslationScreenState extends State<CameraTranslationScreen> {
         backgroundColor: AppColors.appbar,
         leading: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20),
-          child: SvgPicture.asset(
-            AppIcons.backIcon,
-          ),
+          child: SvgPicture.asset(AppIcons.backIcon),
         ),
         title: Text(
           "Camera Translation",
@@ -53,20 +89,39 @@ class _CameraTranslationScreenState extends State<CameraTranslationScreen> {
       body: SafeArea(
         child: Column(
           children: [
-            _image == null ? Text("No Image selected") : Image.file(_image!),
+            const SizedBox(height: 10),
             EnglishSpanishContainer(
               englishImage: AppIcons.engLogo,
               spanishImage: AppIcons.spanLogo,
             ),
-            Spacer(),
+            Expanded(
+              child: _image == null
+                  ? Center(child: Text("No Image selected"))
+                  : Image.file(
+                      _image!,
+                      width: double.infinity,
+                      height: double.infinity,
+                      fit: BoxFit.cover,
+                    ),
+            ),
             Padding(
               padding:
                   const EdgeInsets.symmetric(vertical: 10.0, horizontal: 60.0),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  GestureDetector(child: Image.asset(AppImages.previewImg)),
+                  GestureDetector(
+                    child: SizedBox(
+                      width: 60,
+                      height: 60,
+                      child: _image == null
+                          ? Image.asset(AppImages.previewImg)
+                          : Image.file(
+                              _image!,
+                              fit: BoxFit.cover,
+                            ),
+                    ),
+                  ),
                   GestureDetector(
                     onTap: getImage,
                     child: Container(
@@ -79,8 +134,14 @@ class _CameraTranslationScreenState extends State<CameraTranslationScreen> {
                       ),
                     ),
                   ),
-                  SvgPicture.asset(
-                    AppIcons.flashOffIcon,
+                  GestureDetector(
+                    // Toggle Flash on Tap
+                    onTap: toggleFlash,
+                    child: Icon(
+                      _isFlashOn ? Icons.flash_on : Icons.flash_off,
+                      color: Colors.white,
+                      size: 30,
+                    ),
                   ),
                 ],
               ),
