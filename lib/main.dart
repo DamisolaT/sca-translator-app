@@ -1,15 +1,20 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:sca_translator_app/services/speech_to_text_service.dart';
+
 import 'config/route_strings.dart';
 import 'config/routes.dart';
-import 'package:provider/provider.dart';
+import 'firebase_options.dart';
 
-void main() {
+void main() async {
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   runApp(
     MultiProvider(
       providers: [
-        ChangeNotifierProvider(
-            create: (_) => SpeechToTextService()),
+        ChangeNotifierProvider(create: (_) => SpeechToTextService()),
       ],
       child: const MyApp(),
     ),
